@@ -1,2 +1,68 @@
-<h1>Home#index</h1>
-<p>Find me in app/views/home/index.html.erb</p>
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Simple Map</title>
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
+    <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 100%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+      	position: absolute;
+      	top: 12.5%;
+      	left: 12.5%;
+        height: 75%;
+        width: 75%;
+        
+       
+      }
+    </style>
+  </head>
+  <body>
+  <form id="frm1" action="">
+  Longitude: <input id="latform" type="number" name="fname" value=""><br>
+  Latitude: <input id="longform" type="number" name="lname" value=""><br>
+  Niveau de Zoom: <input id="zoomform" type="number" name="fname" value=""><br>
+</form> 
+<button onclick="myFunction()">Try it</button>
+
+<p id="demo"></p>
+
+    <div id="map"></div>
+    <script>
+      var map;
+      
+      var x = document.getElementById("latform");
+      var y = document.getElementById("longform");
+      var z = document.getElementById("zoomform");
+    var lt = -34.397;
+    var lg = 150;
+    var nivzoom = 8;
+
+      function myFunction() {
+     	
+      lt = parseInt(x.value);
+      lg = parseInt(y.value);
+      nivzoom = parseInt(z.value);    
+      
+      initMap();
+      
+	  }
+
+      function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: lt, lng: lg},
+          zoom: nivzoom
+        });
+      }
+
+      
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=<%=ENV['YOUR_API_KEY']%>&callback=initMap"
+    async defer></script>
+  </body>
+</html>
